@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sanqibookmall.dao.GoodsCategoryMapper">
+    <resultMap id="BaseResultMap" type="sanqibookmall.entity.GoodsCategory">
+        <id column="category_id" jdbcType="BIGINT" property="categoryId"/>
+        <result column="category_level" jdbcType="TINYINT" property="categoryLevel"/>
+        <result column="parent_id" jdbcType="BIGINT" property="parentId"/>
+        <result column="category_name" jdbcType="VARCHAR" property="categoryName"/>
+        <result column="category_rank" jdbcType="INTEGER" property="categoryRank"/>
+        <result column="is_deleted" jdbcType="TINYINT" property="isDeleted"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    category_id, category_level, parent_id, category_name, category_rank, is_deleted
+  </sql>
+    <select id="findGoodsCategoryList" parameterType="Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sq_goods_category
+        <where>
+            <if test="categoryLevel!=null and categoryLevel!=''">
+                and category_level = #{categoryLevel}
+            </if>
+            <if test="parentId!=null and parentId!=''">
+                and parent_id = #{parentId}
+            </if>
+            and is_deleted = 0
+        </where>
+        order by category_rank desc
+        <if test="start!=null and limit!=null">
+            limit #{start},#{limit}
+        </if>
+    </select>
+    <select id="getTotalGoodsCategories" parameterType="Map" resultType="int">
+        select count(*) from sq_goods_category
+        <where>
+            <if test="categoryLevel!=null and categoryLevel!=''">
+                and category_level = #{categoryLevel}
+            </if>
+            <if test="parentId!=null and parentId!=''">
+                and parent_id = #{parentId}
+            </if>
+            and is_deleted = 0
+        </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sq_goods_category
+        where category_id = #{categoryId,jdbcType=BIGINT} and is_deleted=0
+    </select>
+    <select id="selectByLevelAndName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sq_goods_category
+        where category_name = #{categoryName,jdbcType=VARCHAR} and category_level = #{categoryLevel,jdbcType=TINYINT}
+        and is_deleted = 0 limit 1
+    </select>
+    <select id="selectByLevelAndParentIdsAndNumber" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sq_goods_category
+        where parent_id in
+        <foreach item="parentId" collection="parentIds" open="(" separator="," close=")">
+            #{parentId,jdbcType=BIGINT}
+        </foreach>
+        and category_level = #{categoryLevel,jdbcType=TINYINT}
+        and is_deleted = 0
+        order by category_rank desc
+        <if test="number>0">
+            limit #{number}
+        </if>
+    </select>
+    <update id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    update 28090_goods_category set is_deleted=1
+    where category_id = #{categoryId,jdbcType=BIGINT} and is_deleted=0
+  </update>
+    <update id="deleteBatch">
+        update sq_goods_category
+        set is_deleted=1 where category_id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+    <insert id="insert" parameterType="sanqibookmall.entity.GoodsCategory">
+    insert into sq_goods_category (category_id, category_level, parent_id,
+      category_name, category_rank, is_deleted, )
+    values (#{categoryId,jdbcType=BIGINT}, #{categoryLevel,jdbcType=TINYINT}, #{parentId,jdbcType=BIGINT}, 
+      #{categoryName,jdbcType=VARCHAR}, #{categoryRank,jdbcType=INTEGER}, #{isDeleted,jdbcType=TINYINT})
+  </insert>
+    <insert id="insertSelective" parameterType="sanqibookmall.entity.GoodsCategory">
+        insert into sq_goods_category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="categoryId != null">
+                category_id,
+            </if>
+            <if test="categoryLevel != null">
+                category_level,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="categoryName != null">
+                category_name,
+            </if>
+            <if test="categoryRank != null">
+                category_rank,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="categoryId != null">
+                #{categoryId,jdbcType=BIGINT},
+            </if>
+            <if test="categoryLevel != null">
+                #{categoryLevel,jdbcType=TINYINT},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="categoryName != null">
+                #{categoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="categoryRank != null">
+                #{categoryRank,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="sanqibookmall.entity.GoodsCategory">
+        update 28090_goods_category
+        <set>
+            <if test="categoryLevel != null">
+                category_level = #{categoryLevel,jdbcType=TINYINT},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="categoryName != null">
+                category_name = #{categoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="categoryRank != null">
+                category_rank = #{categoryRank,jdbcType=INTEGER},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=TINYINT},
+            </if>
+        </set>
+        where category_id = #{categoryId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="sanqibookmall.entity.GoodsCategory">
+    update sq_goods_category
+    set category_level = #{categoryLevel,jdbcType=TINYINT},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      category_name = #{categoryName,jdbcType=VARCHAR},
+      category_rank = #{categoryRank,jdbcType=INTEGER},
+      is_deleted = #{isDeleted,jdbcType=TINYINT}
+    where category_id = #{categoryId,jdbcType=BIGINT}
+  </update>
+</mapper>

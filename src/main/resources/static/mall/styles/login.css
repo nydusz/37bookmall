@@ -1,0 +1,224 @@
+:root {
+  --primary-color: #cc7eb1;
+  --primary-dark-color: #4489b5;
+}
+body {
+  background-image: linear-gradient(to right, #fbc2eb, #a6c1ee);
+}
+
+.login {
+  width: 450px;
+  height: 570px;
+  margin: 0px auto;
+  margin-top: 100px;
+  background-color: #fff;
+  border: 1px solid #cccccc;
+  border-radius: 15px;
+  font: 12px "宋体", Times New Roman;
+}
+
+.register {
+  width: 450px;
+  height: 670px;
+  margin: 0px auto;
+  margin-top: 100px;
+  background-color: #fff;
+  border: 1px solid #cccccc;
+  border-radius: 15px;
+  font: 12px "宋体", Times New Roman;
+}
+
+.select {
+  position: relative;
+  vertical-align: middle;
+  padding: 0;
+  overflow: hidden;
+  background-color: #fff;
+  color: #555;
+  border: 1px solid #aaa;
+  text-shadow: none;
+  border-radius: 4px;
+  transition: box-shadow 0.25s ease;
+  z-index: 2;
+}
+
+.select:hover {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.select:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
+  border-top-color: #ccc;
+  top: 14px;
+  right: 10px;
+  cursor: pointer;
+  z-index: -2;
+}
+.select select {
+  cursor: pointer;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  background: transparent;
+  background-image: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.select select:focus {
+  outline: none;
+}
+
+.login .login_center {
+  width: 360px;
+  margin: 10px auto;
+  padding: 10px 0;
+}
+
+.btn {
+  display: block;
+  cursor: pointer;
+  margin: 10px 0 0 10px;
+  text-decoration: none;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #ccc;
+  box-shadow: 0 3px 2px rgba(200, 200, 200, 0.3);
+  border-radius: 60%;
+  background: url("../image/back.png") no-repeat;
+}
+
+.login .login_center.hide {
+  display: none;
+}
+
+.login .login_center .login_top {
+  margin: 10px 0;
+}
+
+.login .login_center .login_top .left {
+  height: 40px;
+  line-height: 40px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.login .login_center .login_top .right {
+  height: 40px;
+  line-height: 40px;
+  font-size: 13px;
+}
+
+.login .login_center .login_top .right a {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.login .login_center .login_top .right a:hover {
+  color: var(--primary-color);
+}
+
+.login .login_center .login_top .under-line {
+  height: 2px;
+  background: var(--primary-color);
+  margin: 8px 0;
+}
+
+.login .login_center .login_main {
+  padding: 5px 0;
+}
+
+.login .login_center .login_main input:focus {
+  border: 0;
+  box-shadow: 0 1px 4px var(--primary-color);
+}
+
+.login .login_center .login-info {
+  font: 16px Times New Roman;
+  height: 40px;
+  line-height: 40px;
+  margin: 35px 30px;
+}
+
+.login .login_center .login-info .login-info-input {
+  width: 280px;
+  height: 30px;
+  padding: 5px 10px;
+  font-size: 15px;
+  outline: none;
+  border: 0;
+  border-bottom: 1px solid rgb(128, 125, 125);
+  font-size: 15px;
+  outline: none;
+}
+
+.login .login_center .login-info .verify-code {
+  width: 100px;
+  height: 30px;
+  padding: 5px 10px;
+  margin-right: 30px;
+}
+
+.login .login_center .login-info .send {
+  width: 100px;
+  height: 42px;
+  margin-left: 12px;
+}
+
+.login .login_center .login_submit .submit {
+  border: none;
+  width: 240px;
+  height: 45px;
+  margin-left: 55px;
+  margin-top: 10px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  cursor: pointer;
+  background-image: linear-gradient(to right, #a6c1ee, #fbc2eb);
+  color: #fff;
+}
+
+ul {
+  display: flex;
+  margin-top: 40px;
+}
+.fab {
+  color: var(--primary-color);
+  font-size: 36px;
+}
+ul li {
+  list-style: none;
+  margin-left: 26px;
+  margin-right: 26px;
+}
+.fab:hover {
+  animation: rubberBand 1s;
+  color: var(--primary-dark-color);
+}
+
+@keyframes rubberBand {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  35% {
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  45% {
+    transform: scale3d(0.75, 1, 1);
+  }
+  60% {
+    transform: scale3d(1.2, 0.8, 1);
+  }
+  75% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
