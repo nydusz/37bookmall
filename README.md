@@ -9,5 +9,8 @@
 ## 后台
 bootstrap主题
 
-##
+## 运行与配置
 前后端不分离 配置好数据库即可打开
+
+## 主页预览图
+[![co8u7T.png](https://z3.ax1x.com/2021/04/19/co8u7T.png)](https://imgtu.com/i/co8u7T)
